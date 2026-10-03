@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>3D Sudoku Solver</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Decorative 3D background shapes -->
+    <div class="shape shape-one"></div>
+    <div class="shape shape-two"></div>
+    <div class="shape shape-three"></div>
+
+
+    <!-- Main application -->
+    <main class="container">
+
+        <h1>Sudoku Solver</h1>
+
+        <h2>3D Puzzle Solver</h2>
+
+        <p class="description">
+            Enter the numbers from your Sudoku puzzle.
+            Leave empty cells blank, then click
+            <strong>Solve Sudoku</strong>.
+        </p>
+
+
+        <!-- Sudoku board -->
+        <div id="sudokuGrid" class="sudoku-grid"></div>
+
+
+        <!-- Buttons -->
+        <div class="buttons">
+
+            <button id="solveButton">
+                🧩 Solve Sudoku
+            </button>
+
+            <button id="clearButton">
+                🗑 Clear
+            </button>
+
+        </div>
+
+
+        <!-- Status message -->
+        <div id="message"></div>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,530 @@
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            #4b1979,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 90% 90%,
+            #00505c,
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #080b1a,
+            #171b38,
+            #080b1a
+        );
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.container {
+    width: 520px;
+    max-width: 94%;
+
+    padding: 35px;
+
+    text-align: center;
+
+    position: relative;
+    z-index: 10;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.18);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.6),
+        inset 0 1px 1px
+        rgba(255, 255, 255, 0.2);
+
+    transform:
+        perspective(1200px)
+        rotateX(3deg);
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+h1 {
+    font-size: 48px;
+
+    margin-bottom: 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff00cc,
+            #7b2cff,
+            #00c6ff,
+            #00ff88,
+            #ffff00
+        );
+
+    background-size: 300% 300%;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    animation:
+        titleColor 5s ease infinite;
+
+    text-shadow:
+        0 10px 25px
+        rgba(0, 0, 0, 0.5);
+}
+
+
+h2 {
+    font-size: 20px;
+
+    margin-bottom: 15px;
+
+    color: #00ffff;
+
+    text-shadow:
+        0 0 12px #00ffff;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.description {
+    color: #d7d7d7;
+
+    line-height: 1.5;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================
+   SUDOKU GRID
+========================================= */
+
+.sudoku-grid {
+    width: 405px;
+    height: 405px;
+
+    max-width: 100%;
+
+    margin: 0 auto 25px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(9, 1fr);
+
+    grid-template-rows:
+        repeat(9, 1fr);
+
+    background: #101329;
+
+    border: 4px solid #00ffff;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 15px 35px
+        rgba(0, 0, 0, 0.6),
+
+        0 0 25px
+        rgba(0, 255, 255, 0.25),
+
+        inset 0 0 20px
+        rgba(0, 255, 255, 0.1);
+}
+
+
+/* =========================================
+   CELLS
+========================================= */
+
+.cell {
+    width: 100%;
+    height: 100%;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.25);
+
+    outline: none;
+
+    text-align: center;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    color: white;
+
+    background:
+        rgba(255, 255, 255, 0.04);
+
+    transition:
+        background 0.2s,
+        box-shadow 0.2s;
+}
+
+
+/* =========================================
+   3x3 BOX BORDERS
+========================================= */
+
+/* Vertical borders after columns 3 and 6 */
+
+.cell:nth-child(3n) {
+    border-right: 3px solid #00ffff;
+}
+
+
+/* Horizontal borders after rows 3 and 6 */
+
+.cell:nth-child(n + 19):nth-child(-n + 27),
+.cell:nth-child(n + 46):nth-child(-n + 54) {
+    border-bottom: 3px solid #00ffff;
+}
+
+
+/* =========================================
+   INPUT EFFECT
+========================================= */
+
+.cell:hover {
+    background:
+        rgba(0, 255, 255, 0.12);
+}
+
+
+.cell:focus {
+    background:
+        rgba(0, 255, 255, 0.20);
+
+    box-shadow:
+        inset 0 0 15px
+        rgba(0, 255, 255, 0.6);
+}
+
+
+/* =========================================
+   SOLVED CELLS
+========================================= */
+
+.cell.solved {
+    color: #00ff88;
+
+    background:
+        rgba(0, 255, 136, 0.12);
+
+    text-shadow:
+        0 0 10px #00ff88;
+
+    animation:
+        solvedCell 0.4s ease;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+
+button {
+    min-width: 150px;
+
+    padding: 14px 22px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    color: white;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff00cc,
+            #7b2cff,
+            #0066ff
+        );
+
+    box-shadow:
+        0 7px 0 #17103f,
+        0 15px 25px
+        rgba(0, 0, 0, 0.4);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+
+button:hover {
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 10px 0 #17103f,
+        0 20px 30px
+        rgba(0, 0, 0, 0.5);
+}
+
+
+button:active {
+    transform:
+        translateY(4px);
+
+    box-shadow:
+        0 3px 0 #17103f;
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+#message {
+    min-height: 30px;
+
+    margin-top: 25px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+}
+
+
+.success {
+    color: #00ff88;
+
+    text-shadow:
+        0 0 15px #00ff88;
+}
+
+
+.error {
+    color: #ff4d6d;
+
+    text-shadow:
+        0 0 15px #ff4d6d;
+}
+
+
+/* =========================================
+   3D BACKGROUND SHAPES
+========================================= */
+
+.shape {
+    position: fixed;
+
+    width: 120px;
+    height: 120px;
+
+    border-radius: 30px;
+
+    opacity: 0.15;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    animation:
+        floating 7s infinite ease-in-out;
+}
+
+
+.shape-one {
+    top: 8%;
+    left: 8%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff00cc,
+            #7b2cff
+        );
+
+    transform:
+        rotate(25deg);
+}
+
+
+.shape-two {
+    right: 8%;
+    bottom: 10%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00ffff,
+            #0066ff
+        );
+
+    animation-delay: 2s;
+}
+
+
+.shape-three {
+    right: 15%;
+    top: 15%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00ff88,
+            #ffff00
+        );
+
+    animation-delay: 4s;
+}
+
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes floating {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-45px)
+            rotate(180deg);
+    }
+}
+
+
+@keyframes titleColor {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+@keyframes solvedCell {
+
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 550px) {
+
+    .container {
+        padding: 22px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    h2 {
+        font-size: 17px;
+    }
+
+    .sudoku-grid {
+        width: 100%;
+        height: auto;
+
+        aspect-ratio: 1 / 1;
+    }
+
+    .cell {
+        font-size: 18px;
+    }
+
+    button {
+        min-width: 130px;
+
+        padding: 12px 15px;
+
+        font-size: 14px;
+    }
+}
